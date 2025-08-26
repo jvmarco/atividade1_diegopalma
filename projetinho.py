@@ -4,16 +4,18 @@ from tkinter import messagebox
 def calcular_bissextos():
     try:
         ano_final = int(entry_ano_final.get())
-        ano_ini = 2000
-        lista_anos = list(range(ano_ini, ano_final + 1))
-        ano_bissexto = 0
+        if ano_final >= 4000:
+            messagebox.showerror("Erro", "O ano final deve ser menor que 4000.")
+        else:
+            lista_anos = list(range(2000, ano_final + 1))
+            ano_bissexto = 0
 
-        for ano in lista_anos:
-            if (ano % 4 == 0 and ano % 100 != 0) or (ano % 400 == 0):
-                ano_bissexto += 1
+            for ano in lista_anos:
+                if (ano % 4 == 0 and ano % 100 != 0) or (ano % 400 == 0):
+                    ano_bissexto += 1
 
-        resultado = f"Entre 2000 e {ano_final}, há {ano_bissexto} anos bissextos."
-        messagebox.showinfo("Resultado", resultado)
+            resultado = f"Entre 2000 e {ano_final}, há {ano_bissexto} anos bissextos."
+            messagebox.showinfo("Resultado", resultado)
     except ValueError:
         messagebox.showerror("Erro", "Por favor, insira um número válido.")
 
@@ -34,4 +36,5 @@ botao = tk.Button(janela, text="Calcular", command=calcular_bissextos)
 botao.pack(pady=10)
 
 # Iniciar a interface
+
 janela.mainloop()
